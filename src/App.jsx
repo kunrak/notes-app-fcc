@@ -1,9 +1,10 @@
 import React from 'react'
+import NotesPage from './pages/NotesPage'
 
 function App() {
   return (
-    <div>
-      App
+    <div id="app">
+      <NotesPage />
     </div>
   )
 }
