@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Trash from "../icons/Trash";
+import { setNewOffset } from "../../utils";
 
 function NoteCard({ note }) {
   let mouseStartPos = { x: 0, y: 0 };
@@ -27,27 +28,26 @@ function NoteCard({ note }) {
 
     document.addEventListener("mousemove", mouseMove);
     document.addEventListener("mouseup", mouseUp);
-  }
+  };
 
   const mouseMove = (e) => {
     let mouseMoveDir = {
-        x: mouseStartPos.x - e.clientX,
-        y: mouseStartPos.y - e.clientY,
+      x: mouseStartPos.x - e.clientX,
+      y: mouseStartPos.y - e.clientY,
     };
 
     mouseStartPos.x = e.clientX;
     mouseStartPos.y = e.clientY;
 
-    setPosition({
-      x: cardRef.current.offsetLeft - mouseMoveDir.x,
-      y: cardRef.current.offsetTop - mouseMoveDir.y,
-    })
-  }
+    const newPosition = setNewOffset(cardRef.current, mouseMoveDir);
+
+    setPosition(newPosition);
+  };
 
   const mouseUp = (e) => {
     document.removeEventListener("mousemove", mouseMove);
     document.removeEventListener("mouseup", mouseUp);
-  }
+  };
 
   return (
     <div
