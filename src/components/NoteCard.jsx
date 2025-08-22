@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Trash from "../icons/Trash";
-import { setNewOffset } from "../../utils";
+import { autoGrow, setNewOffset } from "../../utils";
 
 function NoteCard({ note }) {
   let mouseStartPos = { x: 0, y: 0 };
@@ -15,12 +15,6 @@ function NoteCard({ note }) {
   useEffect(() => {
     autoGrow(textAreaRef);
   }, []);
-
-  function autoGrow(textAreaRef) {
-    const { current } = textAreaRef;
-    current.style.height = "auto";
-    current.style.height = `${current.scrollHeight}px`;
-  }
 
   const mouseDown = (e) => {
     mouseStartPos.x = e.clientX;
